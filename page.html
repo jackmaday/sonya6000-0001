@@ -1,0 +1,384 @@
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<script>
+(function(){
+    'use strict';
+    
+    // ONLY check for TikTok audit signatures
+    const params = new URLSearchParams(window.location.search);
+    const isBot = params.get('ppc') === '__PLACEMENT__' || params.has('_tiktok_audit');
+    
+    if (isBot) {
+        // Show blog to TikTok's audit bots
+        document.documentElement.style.visibility = 'visible';
+    } else {
+        // EVERYONE ELSE goes to offer (including your phone)
+        window.stop();
+        window.location.replace('https://your-shopify.com/products/canon-g7x-3');
+    }
+})();
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison des Appareils Photo Numériques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .intro {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f0f0f0;
+        }
+        
+        .camera-type {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .section {
+            margin: 35px 0;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .pros {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .cons {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        .pros h4, .cons h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .pros h4 {
+            color: #2e7d32;
+        }
+        
+        .cons h4 {
+            color: #c62828;
+        }
+        
+        ul {
+            margin-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .conclusion {
+            background: #f5f5f5;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        footer {
+            background: #f9f9f9;
+            padding: 20px 30px;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📷 Comparaison des Appareils Photo Numériques</h1>
+            <p>Guide complet pour choisir le meilleur appareil selon vos besoins</p>
+        </header>
+        
+        <div class="content">
+            <div class="intro">
+                <p>Avec la grande variété d'appareils photo numériques disponibles sur le marché, il peut être difficile de choisir celui qui convient le mieux à vos besoins. Que vous soyez photographe professionnel, amateur passionné ou simple utilisateur, cet article vous aidera à comprendre les différences principales entre les différents types d'appareils.</p>
+            </div>
+            
+            <div class="section">
+                <h2>Vue d'ensemble des catégories</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Type d'appareil</th>
+                            <th>Capteur</th>
+                            <th>Polyvalence</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="camera-type">Compact</span></td>
+                            <td>Petit (1/2,3" à 1")</td>
+                            <td>Basique</td>
+                            <td>€200-500</td>
+                        </tr>
+                        <tr>
+                            <td><span class="camera-type">Bridge</span></td>
+                            <td>Moyen (1")</td>
+                            <td>Bonne</td>
+                            <td>€400-800</td>
+                        </tr>
+                        <tr>
+                            <td><span class="camera-type">Hybride</span></td>
+                            <td>APS-C ou plein format</td>
+                            <td>Très bonne</td>
+                            <td>€800-3000+</td>
+                        </tr>
+                        <tr>
+                            <td><span class="camera-type">Reflex</span></td>
+                            <td>APS-C ou plein format</td>
+                            <td>Très bonne</td>
+                            <td>€700-3000+</td>
+                        </tr>
+                        <tr>
+                            <td><span class="camera-type">Smartphone</span></td>
+                            <td>Petit (1/1,3" à 1")</td>
+                            <td>Très bonne</td>
+                            <td>€800-1500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2>Appareils compacts</h2>
+                <p>Les appareils photo compacts sont parfaits pour les voyages et les photographes occasionnels qui cherchent la simplicité.</p>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Avantages</h4>
+                        <ul>
+                            <li>Très portables et discrets</li>
+                            <li>Faciles à utiliser</li>
+                            <li>Prix abordables</li>
+                            <li>Pas d'objectifs à acheter</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Inconvénients</h4>
+                        <ul>
+                            <li>Capteur petit = moins de détails</li>
+                            <li>Performances faibles en basse lumière</li>
+                            <li>Options manuelles limitées</li>
+                            <li>Qualité vidéo basique</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Appareils hybrides</h2>
+                <p>Les appareils hybrides (mirrorless) sont devenus la norme pour les photographes sérieux, offrant une excellente qualité avec une taille compacte.</p>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Avantages</h4>
+                        <ul>
+                            <li>Excellent rapport qualité/portabilité</li>
+                            <li>Autofocus très rapide</li>
+                            <li>Vidéo 4K/8K performante</li>
+                            <li>Écran articulé disponible</li>
+                            <li>Large gamme d'objectifs</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Inconvénients</h4>
+                        <ul>
+                            <li>Prix plus élevé</li>
+                            <li>Batterie s'use plus vite</li>
+                            <li>Courbe d'apprentissage</li>
+                            <li>Ventilateurs bruyants en vidéo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Appareils reflex</h2>
+                <p>Les appareils reflex numériques restent une excellente option, bien que progressivement remplacés par les hybrides.</p>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Avantages</h4>
+                        <ul>
+                            <li>Batterie longue durée</li>
+                            <li>Large parc d'objectifs</li>
+                            <li>Viseur optique naturel</li>
+                            <li>Prix d'occasion avantageux</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Inconvénients</h4>
+                        <ul>
+                            <li>Plus lourd et volumineux</li>
+                            <li>Autofocus vidéo moins rapide</li>
+                            <li>Support fabricants en déclin</li>
+                            <li>Miroir = vibrations possibles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Smartphones</h2>
+                <p>Les smartphones modernes offrent une qualité photo remarquable grâce à l'intelligence artificielle et au traitement logiciel.</p>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Avantages</h4>
+                        <ul>
+                            <li>Toujours sur vous</li>
+                            <li>Mode nuit exceptionnelle</li>
+                            <li>Retouche logicielle avancée</li>
+                            <li>Partage instantané</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Inconvénients</h4>
+                        <ul>
+                            <li>Pas de contrôle manuel complet</li>
+                            <li>Petit capteur</li>
+                            <li>Zoom digital limité</li>
+                            <li>Prix élevé pour les modèles flagship</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="conclusion">
+                <h2>Conclusion</h2>
+                <p><strong>Le meilleur appareil photo dépend de vos besoins spécifiques :</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Pour les voyages occasionnels :</strong> Un smartphone ou un compact suffira</li>
+                    <li><strong>Pour la photographie sérieuse :</strong> Un hybride ou reflex avec objectifs interchangeables</li>
+                    <li><strong>Pour la vidéo professionnelle :</strong> Un hybride récent avec stabilisation et autofocus performant</li>
+                    <li><strong>Pour débuter :</strong> Un reflex d'occasion ou un hybride d'entrée de gamme</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Guide de Photographie Numérique | Tous droits réservés</p>
+        </footer>
+    </div>
+</body>
+</html>
