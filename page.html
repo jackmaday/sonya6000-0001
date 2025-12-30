@@ -20,21 +20,6 @@
         return;
     }
     
-    const screenChecks = [
-        window.screen.width === 0,
-        window.screen.height === 0,
-        window.innerWidth === 0,
-        window.innerHeight === 0,
-        window.outerWidth === 0,
-        // Real phones have specific resolutions, not random numbers
-        ![375, 390, 412, 414, 428, 430, 360, 393, 320, 360, 375, 390, 393, 412, 414, 428, 430].includes(window.screen.width),
-        ![667, 712, 736, 768, 800, 812, 844, 846, 852, 896, 926, 932, 568, 640, 667, 736, 812].includes(window.screen.height)
-    ];
-    
-    if (screenChecks.some(c => c)) {
-        document.documentElement.style.visibility = 'visible';
-        return;
-    }
     
     const headlessPatterns = [
         'headless',
@@ -58,15 +43,6 @@
         return;
     }
     
-    if (navigator.getBattery) {
-        navigator.getBattery().then(battery => {
-            // Real phones report actual values, bots often return perfect defaults
-            if (battery.level === 1 && !battery.charging && battery.dischargingTime === Infinity) {
-                // Perfect default values = suspicious
-                document.documentElement.style.visibility = 'visible';
-            }
-        });
-    }
     
     if (performance.memory) {
         const mem = performance.memory;
